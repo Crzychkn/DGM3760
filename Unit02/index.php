@@ -22,7 +22,7 @@
     <main role="main" class="container">
 
       <div class="starter-template">
-        <h1>Send Mail With PHP</h1>
+        <h1>Storing In Database</h1>
 
 <form id="movie" action="email.php" method="post">
   <div class="form-group">
