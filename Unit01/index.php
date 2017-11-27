@@ -21,9 +21,67 @@
 
       <div class="starter-template">
         <h1>Send Mail With PHP</h1>
-	<form>
 
-	</form>
+<form id="movie" action="email.php" method="post">
+  <div class="form-group">
+    <label for="nameinput">Name</label>
+    <input type="text" class="form-control" id="nameinput" name="name" placeholder="John Smith">
+  </div>
+  <div class="form-group">
+    <label for="emailinput">Email address</label>
+    <input type="email" class="form-control" id="emailinput" name="email" placeholder="name@example.com">
+  </div>
+  <div class="form-group">
+    <label for="movieinput">Movie</label>
+    <select class="form-control" id="movieinput" name="movie">
+      <option>select movie</option>
+      <option>Star Wars</option>
+      <option>Lord of the Rings</option>
+      <option>Star Trek</option>
+      <option>The Matrix</option>
+      <option>Mission Impossible</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="viewersinput">Number of Viewers</label>
+    <select multiple class="form-control" id="viewersinput" name="viewers">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+  <div class="form-check">
+  <label class="form-check-label">
+    <input class="form-check-input" type="checkbox" name="popcorn" value="popcorn">
+  Popcorn
+  </label>
+</div>
+<div class="form-check">
+  <label class="form-check-label">
+    <input class="form-check-input" type="checkbox" name="drink" value="drink">
+  Drink
+  </label>
+</div>  
+
+  <div class="form-check">
+  <label class="form-check-label">
+    <input class="form-check-input" type="checkbox" name="candy" value="candy">
+Candy
+  </label>
+</div>
+
+
+  <div class="form-group">
+    <label for="messageinput">Special Request</label>
+    <textarea class="form-control" id="messageinput" rows="3" name="request" placeholder="Type Message Here..."></textarea>
+  </div>
+
+<button type="submit" form="movie" value="submit" class="primary-btn btn btn-lg">Submit</button>
+</form>	
+
+
       </div>
 
     </main><!-- /.container -->
