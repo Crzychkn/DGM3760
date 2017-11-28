@@ -24,7 +24,7 @@
       <div class="starter-template">
         <h1>Send Newsletter</h1>
 
-<form id="movie" action="email.php" method="post">
+<form id="spam" action="message.php" method="post">
   <div class="form-group">
     <label for="subject">Subject</label>
     <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject...">
@@ -36,7 +36,7 @@
   </div>
 
 
-<button type="submit" form="movie" value="submit" class="primary-btn btn btn-lg">Send Message</button>
+<button type="submit" form="spam" value="submit" class="primary-btn btn btn-lg">Send Message</button>
 </form>	
 
 
