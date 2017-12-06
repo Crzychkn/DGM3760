@@ -1,44 +1,47 @@
-<?php include'../../includes/connect.php'?>
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Web Languages II</title>
-
-    <!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
-  </head>
-
-  <body>
+<?php include'header.php' ?>
 
     <main role="main" class="container">
 
+<?php include'navigation.php' ?>
+
       <div class="starter-template">
-        <h1>Newsletter Signup</h1>
+        <h1>Submit Recipe</h1>
 
-<form id="movie" action="email.php" method="post">
+<form id="recipe" action="addrecipe.php" method="post">
+
   <div class="form-group">
-    <label for="nameinput">First Name</label>
-    <input type="text" class="form-control" id="nameinput" name="firstname" placeholder="John">
-  </div>
-  <div class="form-group">
-    <label for="nameinput">Last Name</label>
-    <input type="text" class="form-control" id="nameinput" name="lastname" placeholder="Smith">
-  </div>
-  <div class="form-group">
-    <label for="emailinput">Email address</label>
-    <input type="email" class="form-control" id="emailinput" name="email" placeholder="name@example.com">
+    <label for="nameinput">Recipe Name</label>
+    <input type="text" class="form-control" id="nameinput" name="recipename" placeholder="Smoked Chicken">
   </div>
 
-<button type="submit" form="movie" value="submit" class="primary-btn btn btn-lg">Sign Up</button>
+  <div class="form-group">
+    <label for="cooktime">Cook Time</label>
+    <input type="text" class="form-control" id="cooktime" name="cooktime" placeholder="30 Minutes">
+  </div>
+
+  <div class="form-group">
+    <label for="ingredients">Ingredients</label>
+    <textarea type="text" class="form-control" rows="6" id="ingredients" name="ingredients" placeholder="4 cups water"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="directions">Directions</label>
+    <textarea type="text" class="form-control" rows="6" id="directions" name="directions" placeholder="Mix water, milk, and sugar in pot."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="picture">Picture</label>
+    <input type="file" class="form-control-file" id="picture" name="picture">
+  </div>
+
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input type="text" class="form-control" id="author" name="author" placeholder="John Smith">
+  </div>
+
+
+
+<button type="submit" form="recipe" value="submit" class="primary-btn btn btn-lg">Submit</button>
 </form>	
 
 

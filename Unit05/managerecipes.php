@@ -4,7 +4,7 @@
 	if (isset($_POST))
 	{
 
-		$query = "select * from newsletter";
+		$query = "select * from recipes";
 
 		$result = mysqli_query($conn, $query);
 
@@ -20,39 +20,24 @@
 
 ?>
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Web Languages II</title>
-
-    <!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
-  </head>
-
-  <body>
+<?php include'header.php'?>
 
     <main role="main" class="container">
 
-      <div class="starter-template">
-        <h1>Newsletter Unsubscribe</h1>
+<?php include'navigation.php'?>
 
-<form id="unsubscribe" action="unsubscribe.php" method="post">
+      <div class="starter-template">
+        <h1>Manage Recipes</h1>
+
+<form id="unsubscribe" action="managerecipes.php" method="post">
   <div class="form-group">
-    <label for="nameinput">Member List</label>
+    <label for="nameinput">Recipes</label>
 <br>
 <!-- Checkbox and foreach loop here -->
 
 <?php
 
-$query = "select * from newsletter";
+$query = "select * from recipes";
 
 $result = mysqli_query($conn, $query);
 
@@ -60,7 +45,7 @@ while ($row = mysqli_fetch_array($result))
 {
 	echo '<label>';
 	echo '<input type="checkbox" value="'.$row['id'].'" name="todelete[]" /> ';
-	echo $row['first']." " ." ". $row['last']." "." ".$row['email'];
+	echo $row['name']." " ." ". $row['cooketime']." "." ".$row['author'];
 	echo '</label>';
 	echo '<br>';
 }
