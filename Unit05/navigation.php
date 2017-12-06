@@ -6,7 +6,6 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="index.php">Submit Recipe</a>
       <a class="nav-item nav-link" href="listrecipes.php">List Recipes</a>
-      <a class="nav-item nav-link" href="managerecipes.php">Manage Recipes</a>
     </div>
   </div>
 </nav>
