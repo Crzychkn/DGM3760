@@ -3,7 +3,7 @@
 <?php
 
 $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
-$filename = $_POST['recipename'].time().'.'.$ext;
+$filename = $_POST['first'].$_POST['last'].time().'.'.$ext;
 $filepath = 'images/';
 
 if ($_FILES['picture']['size'] == 0){
@@ -26,24 +26,23 @@ move_uploaded_file($tmp_name, $filepath.$filename);
 @unlink($_FILES['picture']['tmp_name']);
 
 //Store in Database
-$stmt = $conn->prepare("insert into recipessix (name, cooktime, ingredients, directions, image, author, approved) values (?,?,?,?,?,?,?)");
+$stmt = $conn->prepare("insert into employees (first, last, phone, email, expertise, image) values (?,?,?,?,?,?)");
 
-$stmt->bind_param("ssssssi", $name, $cooktime, $ingredients, $directions, $image, $author, $approved);
+$stmt->bind_param("ssisss", $first, $last, $phone, $email, $expertise, $image);
 
-$name = $_POST['recipename'];
-$cooktime = $_POST['cooktime'];
-$ingredients = $_POST['ingredients'];
-$directions = $_POST['directions'];
+$first = $_POST['first'];
+$last = $_POST['last'];
+$phone = $_POST['phone'];
+$email = $_POST['email'];
+$expertise = $_POST['expertise'];
 $image = $filepath.$filename;
-$author = $_POST['author'];
-$approved = 0;
 
 
 $stmt->execute();
 $stmt->close();
 $conn->close();
 
-echo "<h2>Thanks for adding a recipe! An admin will review your recipe soon.</h2>";
+echo "<h2>Employee has been added!</h2>";
 
 }
 

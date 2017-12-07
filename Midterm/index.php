@@ -1,49 +1,61 @@
-<?php include'header.php' ?>
+<?php include'../../includes/connect.php'?>
+<?php include'header.php'?>
 
     <main role="main" class="container">
 
-<?php include'navigation.php' ?>
+<?php include'navigation.php'?>
 
       <div class="starter-template">
-        <h1>Submit Recipe</h1>
+        <h1>Employee Listing</h1>
 
-<form id="recipe" action="addrecipe.php" method="post" enctype="multipart/form-data">
-
+<form id="manageemployees" action="manageemployees.php" method="post">
   <div class="form-group">
-    <label for="nameinput">Recipe Name</label>
-    <input type="text" class="form-control" id="nameinput" name="recipename" placeholder="Smoked Chicken">
+<br>
+
+<?php
+
+$query = "select * from employees";
+
+$result = mysqli_query($conn, $query);
+
+while ($row = mysqli_fetch_array($result))
+{
+   $resultArr[] = $row;
+}
+
+?>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Expertise</th>
+    </tr>
+  </thead>
+  <tbody>
+
+<?php foreach($resultArr as $output): ?>
+    <tr>
+    <td><img src="<?php echo $output['image']?>" alt="" class="img-thumbnail small-thumb"></td>
+    <td><?php echo $output['first']." ".$output['last']?></td>
+    <td><?php echo $output['phone']?></td>
+    <td><?php echo $output['email']?></td>
+    <td><?php echo $output['expertise']?></td>
+    <td>
+      <button name="details" type="submit" form="manageemployees" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Details</button>
+    </td>
+    </tr>
+<?php endforeach; ?>
+
+  </tbody>
+</table>
+
+
   </div>
 
-  <div class="form-group">
-    <label for="cooktime">Cook Time</label>
-    <input type="text" class="form-control" id="cooktime" name="cooktime" placeholder="30 Minutes">
-  </div>
-
-  <div class="form-group">
-    <label for="ingredients">Ingredients</label>
-    <textarea type="text" class="form-control" rows="6" id="ingredients" name="ingredients" placeholder="4 cups water"></textarea>
-  </div>
-
-  <div class="form-group">
-    <label for="directions">Directions</label>
-    <textarea type="text" class="form-control" rows="6" id="directions" name="directions" placeholder="Mix water, milk, and sugar in pot."></textarea>
-  </div>
-
-  <div class="form-group">
-    <label for="picture">Picture</label>
-    <input type="file" class="form-control-file" id="picture" name="picture">
-    <br>
-    <p>Image must be .jpg, .png, or .gif. Size must be less than 1mb and less than 200px X 200px.</p>
-  </div>
-
-  <div class="form-group">
-    <label for="author">Author</label>
-    <input type="text" class="form-control" id="author" name="author" placeholder="John Smith">
-  </div>
-
-
-
-<button type="submit" form="recipe" value="submit" class="primary-btn btn btn-lg">Submit</button>
 </form>	
 
 
