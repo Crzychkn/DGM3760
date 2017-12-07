@@ -1,4 +1,3 @@
-<?php include'../../includes/connect.php'?>
 <?php include'header.php'?>
 
     <main role="main" class="container">
