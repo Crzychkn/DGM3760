@@ -65,7 +65,37 @@ if (isset($_POST['delete']))
 
 if (isset($_POST['update']))
 {
-   echo $output['name'];
+
+  echo "<div class='form-group'>";
+    echo "<label for='nameinput'>Recipe Name</label>";
+    echo "<input type='text' class='form-control' id='nameinput' name='recipename' value='".$output['name']."'";
+  echo "</div>";
+
+  echo "<div class='form-group'>";
+    echo "<label for='cooktime'>Cook Time</label>";
+    echo "<input type='text' class='form-control' id='cooktime' name='cooktime' value='".$output['cooktime']."'";
+  echo "</div>";
+
+  echo "<div class='form-group'>";
+    echo "<label for='ingredients'>Ingredients</label>";
+    echo "<textarea type='text' class='form-control' rows='6' id='ingredients' name='ingredients' value='".$output['ingredients']."'></textarea>";
+  echo "</div>";
+
+  echo "<div class='form-group'>";
+    echo "<label for='directions'>Directions</label>";
+    echo "<textarea type='text' class='form-control' rows='6' id='directions' name='directions' value='".$output['directions']."'></textarea>";
+  echo "</div>";
+
+  echo "<div class='form-group'>";
+    echo "<label for='author'>Author</label>";
+    echo "<input type='text' class='form-control' id='author' name='author' value='".$output['author']."'>";
+  echo "</div>";
+
+
+echo "<button type='submit' form='managerecipes' value='".$output['id']."' name='confirmupdate' class='primary-btn btn btn-lg'>Update</button>";
+echo "    ";
+echo "<a href='listrecipes.php'><button type='submit' form='dead' value='submit' class='primary-btn btn btn-lg'>Cancel</button></a>";
+
 }
 
 }
@@ -78,6 +108,13 @@ if (isset($_POST['confirmdelete']))
    $query = "delete from recipes where id='".$_POST['confirmdelete']."'";
    mysqli_query($conn, $query);
    @unlink($_POST['photo']);
+   header("location: listrecipes.php");
+}
+
+if (isset($_POST['confirmupdate']))
+{
+   $query = "update recipes set name='".$_POST['recipename']."', cooktime='".$_POST['cooktime']."', ingredients='".$_POST['ingredients']."', directions='".$_POST['directions']."', author='".$_POST['author']."' where id='".$_POST['confirmupdate']."';";
+   mysqli_query($conn, $query);
    header("location: listrecipes.php");
 }
 
