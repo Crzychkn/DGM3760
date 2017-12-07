@@ -4,6 +4,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
+      <a class="nav-item nav-link" href="index.php">Login</a>
+      <a class="nav-item nav-link" href="register.php">Register</a>
       <?php if (isset($_SESSION['username']) && isset($_SESSION['password'])): ?>
       <a class="nav-item nav-link" href="logout.php">Logout</a>
       <?php else: ?>
