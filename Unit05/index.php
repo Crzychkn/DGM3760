@@ -7,7 +7,7 @@
       <div class="starter-template">
         <h1>Submit Recipe</h1>
 
-<form id="recipe" action="addrecipe.php" method="post">
+<form id="recipe" action="addrecipe.php" method="post" enctype="multipart/form-data">
 
   <div class="form-group">
     <label for="nameinput">Recipe Name</label>
@@ -32,6 +32,8 @@
   <div class="form-group">
     <label for="picture">Picture</label>
     <input type="file" class="form-control-file" id="picture" name="picture">
+    <br>
+    <p>Image must be .jpg, .png, or .gif. Size must be less than 1mb and less than 200px X 200px.</p>
   </div>
 
   <div class="form-group">

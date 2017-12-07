@@ -1,25 +1,4 @@
 <?php include'../../includes/connect.php'?>
-
-<?php
-	if (isset($_POST))
-	{
-
-		$query = "select * from recipes";
-
-		$result = mysqli_query($conn, $query);
-
-		foreach ($_POST['todelete'] as $delete)
-		{
-         $query = "delete from newsletter where id=$delete";
-
-         $result = mysqli_query($conn, $query);
-		  	
-		}
-	}
-
-
-?>
-
 <?php include'header.php'?>
 
     <main role="main" class="container">
@@ -29,11 +8,9 @@
       <div class="starter-template">
         <h1>Manage Recipes</h1>
 
-<form id="unsubscribe" action="managerecipes.php" method="post">
+<form id="managerecipes" action="managerecipes.php" method="post">
   <div class="form-group">
-    <label for="nameinput">Recipes</label>
 <br>
-<!-- Checkbox and foreach loop here -->
 
 <?php
 
@@ -43,19 +20,43 @@ $result = mysqli_query($conn, $query);
 
 while ($row = mysqli_fetch_array($result))
 {
-	echo '<label>';
-	echo '<input type="checkbox" value="'.$row['id'].'" name="todelete[]" /> ';
-	echo $row['name']." " ." ". $row['cooketime']." "." ".$row['author'];
-	echo '</label>';
-	echo '<br>';
+   $resultArr[] = $row;
 }
 
 ?>
 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Recipe Name</th>
+      <th scope="col">Cooktime</th>
+      <th scope="col">Author</th>
+      <th scope="col">Manage</th>
+    </tr>
+  </thead>
+  <tbody>
+
+<?php foreach($resultArr as $output): ?>
+    <tr>
+    <td><img src="<?php echo $output['image']?>" alt="" class="img-thumbnail small-thumb"></td>
+    <td><?php echo $output['name']?></td>
+    <td><?php echo $output['cooktime']?></td>
+    <td><?php echo $output['author']?></td>
+    <td>
+      <button name="details" type="submit" form="managerecipes" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Details</button>
+      <button name="delete" type="submit" form="managerecipes" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Delete</button>
+      <button name="update" type="submit" form="managerecipes" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Update</button>
+    </td>
+    </tr>
+<?php endforeach; ?>
+
+  </tbody>
+</table>
+
 
   </div>
 
-<button type="submit" form="unsubscribe" value="submit" class="primary-btn btn btn-lg">Unsubscribe</button>
 </form>	
 
 
