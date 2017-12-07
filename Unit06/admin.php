@@ -1,12 +1,31 @@
-<?php include'../../includes/connect.php'?>
 <?php include'header.php'?>
+
+<?php
+
+if (isset($_POST['username']) || isset($_POST['password']))
+{
+   $_SESSION['username'] = $_POST['username'];
+   $_SESSION['password'] = $_POST['password']; 
+}
+if ($_SESSION['username'] != $username && $_SESSION['password'] != $password)
+{
+   header("location: login.php");
+}
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+header("location: login.php");
+exit;
+}
+
+?>
 
     <main role="main" class="container">
 
 <?php include'navigation.php'?>
 
       <div class="starter-template">
-        <h1>Manage Recipes</h1>
+        <h1>Admin Panel</h1>
 
 <form id="managerecipes" action="managerecipes.php" method="post">
   <div class="form-group">
@@ -38,7 +57,6 @@ while ($row = mysqli_fetch_array($result))
   <tbody>
 
 <?php foreach($resultArr as $output): ?>
-<?php if ($output['approved'] == 1): ?>
     <tr>
     <td><img src="<?php echo $output['image']?>" alt="" class="img-thumbnail small-thumb"></td>
     <td><?php echo $output['name']?></td>
@@ -46,9 +64,13 @@ while ($row = mysqli_fetch_array($result))
     <td><?php echo $output['author']?></td>
     <td>
       <button name="details" type="submit" form="managerecipes" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Details</button>
+      <button name="delete" type="submit" form="managerecipes" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Delete</button>
+      <button name="update" type="submit" form="managerecipes" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Update</button>
+<?php if ($output['approved'] == 0): ?>
+      <button name="approve" type="submit" form="managerecipes" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Approve</button>
+<?php endif; ?>
     </td>
     </tr>
-<?php endif; ?>
 <?php endforeach; ?>
 
   </tbody>

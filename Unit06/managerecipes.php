@@ -25,6 +25,10 @@ else if (isset($_POST['update']))
 {
    $id = $_POST['update'];
 }
+else if (isset($_POST['approve']))
+{
+   $id = $_POST['approve'];
+}
 $query = "select * from recipessix where id='$id'";
 
 $result = mysqli_query($conn, $query);
@@ -108,14 +112,21 @@ if (isset($_POST['confirmdelete']))
    $query = "delete from recipessix where id='".$_POST['confirmdelete']."'";
    mysqli_query($conn, $query);
    @unlink($_POST['photo']);
-   header("location: listrecipes.php");
+   header("location: admin.php");
 }
 
 if (isset($_POST['confirmupdate']))
 {
    $query = "update recipessix set name='".$_POST['recipename']."', cooktime='".$_POST['cooktime']."', ingredients='".$_POST['ingredients']."', directions='".$_POST['directions']."', author='".$_POST['author']."' where id='".$_POST['confirmupdate']."';";
    mysqli_query($conn, $query);
-   header("location: listrecipes.php");
+   header("location: admin.php");
+}
+
+if (isset($_POST['approve']))
+{
+   $query = "update recipessix set approved='1' where id='".$_POST['approve']."';";
+   mysqli_query($conn, $query);
+   header("location: admin.php");
 }
 
 ?>

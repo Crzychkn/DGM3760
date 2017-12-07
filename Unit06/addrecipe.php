@@ -26,9 +26,9 @@ move_uploaded_file($tmp_name, $filepath.$filename);
 @unlink($_FILES['picture']['tmp_name']);
 
 //Store in Database
-$stmt = $conn->prepare("insert into recipessix (name, cooktime, ingredients, directions, image, author) values (?,?,?,?,?,?)");
+$stmt = $conn->prepare("insert into recipessix (name, cooktime, ingredients, directions, image, author, approved) values (?,?,?,?,?,?,?)");
 
-$stmt->bind_param("ssssss", $name, $cooktime, $ingredients, $directions, $image, $author);
+$stmt->bind_param("ssssssi", $name, $cooktime, $ingredients, $directions, $image, $author, $approved);
 
 $name = $_POST['recipename'];
 $cooktime = $_POST['cooktime'];
@@ -36,14 +36,14 @@ $ingredients = $_POST['ingredients'];
 $directions = $_POST['directions'];
 $image = $filepath.$filename;
 $author = $_POST['author'];
-
+$approved = 0;
 
 
 $stmt->execute();
 $stmt->close();
 $conn->close();
 
-echo "<h2>Thanks for adding a recipe!</h2>";
+echo "<h2>Thanks for adding a recipe! An admin will review your recipe soon.</h2>";
 
 }
 
