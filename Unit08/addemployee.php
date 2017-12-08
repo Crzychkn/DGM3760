@@ -4,6 +4,17 @@
 
 <?php include'navigation.php' ?>
 
+<?php
+
+$query = "select * from dept";
+$deptResult = mysqli_query($conn, $query) or die ('query failed');
+
+$query = "select * from access8 order by item asc";
+$accessResult = mysqli_query($conn, $query) or die ('query failed');
+
+
+?>
+
       <div class="starter-template">
         <h1>Add Employee</h1>
 
@@ -37,10 +48,58 @@
   <div class="form-group">
     <label for="picture">Picture</label>
     <input type="file" class="form-control-file" id="picture" name="picture">
-    <br>
-    <p>Image must be .jpg, .png, or .gif. Size must be less than 1mb and less than 200px X 200px.</p>
+<small id="passwordHelpBlock" class="form-text text-muted">
+    Image must be .jpg, .png, or .gif. Size must be less than 1mb and less than 200px X 200px.
+</small>
   </div>
 
+   <div class="form-check">
+   <label for="pay">Pay Type</label>
+   <br>
+   <label class="form-check-label"><input class="form-check-input" type="radio" name="pay" value="1">Salary</input></label>
+   <br>
+   <label class="form-check-label"><input class="form-check-input" type="radio" name="pay" value="2">Hourly</input></label>
+
+   </div>
+
+  <div class="form-group">
+   <label for="dept">Department</label>
+   <br>
+   <select name="dept">
+   <option>Please select department</option>
+   <?php 
+   
+   while ($row = mysqli_fetch_array($deptResult)){
+
+         echo "<option  value='".$row['id']."'>".$row['dept']."</option>";
+
+   }
+
+   ?>
+   </select>
+   </div>
+
+
+   <div class="form-check">
+      
+      <label for="access" >Approved Access</label>
+ <small id="passwordHelpBlock" class="form-text text-muted">
+     Check items Employee needs access to:
+</small>
+      
+      <?php
+
+      while ($row = mysqli_fetch_array($accessResult)) {
+      
+         echo "<label><input type='checkbox' value='".$row['id']."' name='access[]' >  ".$row['item']."</label>";
+         echo "<br>";
+
+      }
+
+      ?>
+
+
+   </div>
 
 <button type="submit" form="employee" value="submit" class="primary-btn btn btn-lg">Add</button>
 </form>	

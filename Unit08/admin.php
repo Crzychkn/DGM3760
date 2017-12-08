@@ -1,5 +1,6 @@
 <?php include'header.php'?>
 
+
 <?php
 
 // If session variable is not set it will redirect to login page
