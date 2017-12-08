@@ -1,5 +1,9 @@
 <?php include'header.php'?>
 
+    <main role="main" class="container">
+
+<?php include'navigation.php'?>
+
 <?php
 
 // If session variable is not set it will redirect to login page
@@ -8,14 +12,11 @@ header("location: index.php");
 exit;
 }
 
+
 ?>
 
-    <main role="main" class="container">
-
-<?php include'navigation.php'?>
-
       <div class="starter-template">
-        <h1>Manage Employees</h1>
+        <h1>Employee Listing</h1>
 
 <form id="manageemployees" action="manageemployees.php" method="post">
   <div class="form-group">
@@ -55,8 +56,6 @@ while ($row = mysqli_fetch_array($result))
     <td><?php echo $output['expertise']?></td>
     <td>
       <button name="details" type="submit" form="manageemployees" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Details</button>
-      <button name="delete" type="submit" form="manageemployees" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Delete</button>
-      <button name="update" type="submit" form="manageemployees" value="<?php echo $output['id'];?>" class="primary-btn btn btn-sm">Update</button>
     </td>
     </tr>
 <?php endforeach; ?>

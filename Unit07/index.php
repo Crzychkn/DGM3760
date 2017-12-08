@@ -10,7 +10,7 @@ $username_err = $password_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
-    if(empty(trim($_POST["username"]))){
+    if(empty(trim($_POST['username']))){
         $username_err = 'Please enter username.';
     } else{
         $username = trim($_POST["username"]);
@@ -48,8 +48,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         if(password_verify($password, $hashed_password)){
                             /* Password is correct, so start a new session and
                             save the username to the session */
-                            session_start();
                             $_SESSION['username'] = $username;      
+                            setcookie('username', $username, time() + (60*60*24*30));
+                            setcookie('firstname', $firstname, time() + (60*60*24*30));
+                            setcookie('lastname', $lastname, time() + (60*60*24*30));
                             header("location: admin.php");
                         } else{
                             // Display an error message if password is not valid

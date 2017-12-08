@@ -4,12 +4,14 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
+      <?php if(isset($_SESSION['username'])): ?>
+      <a class="nav-item nav-link" href="addemployee.php">Add Employee</a>
+      <a class="nav-item nav-link" href="admin.php">Manage Employees</a>
+      <a class="nav-item nav-link" href="logout.php">Logout</a>
+      <p class="nav-item nav-link">Logged in as <?php echo $_SESSION['username']; ?></p>
+      <?php else: ?>
       <a class="nav-item nav-link" href="index.php">Login</a>
       <a class="nav-item nav-link" href="register.php">Register</a>
-      <?php if (isset($_SESSION['username']) && isset($_SESSION['password'])): ?>
-      <a class="nav-item nav-link" href="logout.php">Logout</a>
-      <?php else: ?>
-      <a class="nav-item nav-link" href="admin.php">Admin Login</a>
       <?php endif; ?>
     </div>
   </div>
