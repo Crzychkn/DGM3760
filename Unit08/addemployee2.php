@@ -26,9 +26,9 @@ move_uploaded_file($tmp_name, $filepath.$filename);
 @unlink($_FILES['picture']['tmp_name']);
 
 //Store in Database
-$stmt = $conn->prepare("insert into employees8 (first, last, phone, email, expertise, image) values (?,?,?,?,?,?)");
+$stmt = $conn->prepare("insert into employees8 (first, last, phone, email, expertise, image, dept, pay) values (?,?,?,?,?,?,?,?)");
 
-$stmt->bind_param("ssisss", $first, $last, $phone, $email, $expertise, $image);
+$stmt->bind_param("ssisssii", $first, $last, $phone, $email, $expertise, $image, $dept, $pay);
 
 $first = $_POST['first'];
 $last = $_POST['last'];
@@ -36,10 +36,26 @@ $phone = $_POST['phone'];
 $email = $_POST['email'];
 $expertise = $_POST['expertise'];
 $image = $filepath.$filename;
+$dept = $_POST['dept'];
+$pay = $_POST['pay'];
 
 
 $stmt->execute();
 $stmt->close();
+
+$recent_id = mysqli_insert_id($conn);
+
+foreach ($_POST['access'] as $access_id)
+{
+   $stmt = $conn->prepare("insert into approvedaccess8 (emp_id, item_id) values (?,?)");
+
+   $stmt->bind_param("ii", $recent_id, $access_id);
+
+   $stmt->execute();
+   $stmt->close();
+
+}
+
 $conn->close();
 
 echo "<h2>Employee has been added!</h2>";

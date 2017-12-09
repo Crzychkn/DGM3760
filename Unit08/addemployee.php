@@ -70,32 +70,23 @@ $accessResult = mysqli_query($conn, $query) or die ('query failed');
    <?php 
    
    while ($row = mysqli_fetch_array($deptResult)){
-
          echo "<option  value='".$row['id']."'>".$row['dept']."</option>";
-
    }
-
    ?>
    </select>
    </div>
 
-
    <div class="form-check">
-      
       <label for="access" >Approved Access</label>
  <small id="passwordHelpBlock" class="form-text text-muted">
      Check items Employee needs access to:
 </small>
       
       <?php
-
       while ($row = mysqli_fetch_array($accessResult)) {
-      
          echo "<label><input type='checkbox' value='".$row['id']."' name='access[]' >  ".$row['item']."</label>";
          echo "<br>";
-
       }
-
       ?>
 
 

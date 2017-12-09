@@ -1,5 +1,16 @@
 <?php include'header.php'?>
 
+<?php
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+header("location: index.php");
+exit;
+}
+
+?>
+
+
     <main role="main" class="container">
 
 <?php include'navigation.php'?>
@@ -54,6 +65,22 @@ if (isset($_POST['details']))
    echo "<p>Phone: ".$output['phone']."</p>";
    echo "<p>Email: ".$output['email']."</p>";
    echo "<p>Expertise: ".$output['expertise']."</p>";
+   echo $output['pay'] == 1 ? '<p>Pay Type: Salary':'<p>Pay Type: Hourly'."</p>";
+   echo "<br>";
+
+
+   $joinQuery = "select * from access8 inner join approvedaccess8 on (access8.id = approvedaccess8.item_id) where emp_id='".$output['id']."';";
+
+   $result2 = mysqli_query($conn, $joinQuery) or die ('query failed');
+
+   echo "<br>";
+   echo "<h3>Employee has access to:</h3>";
+
+   while ($row2 = mysqli_fetch_array($result2)) {
+      echo $row2['item'];
+      echo "<br>";
+   }
+
    echo "<br>";
 
   echo "<div class='form-group'>";
@@ -75,6 +102,7 @@ if (isset($_POST['details']))
    echo "<button name='emailconfirm' form='manageemployees' class='primary-btn btn btn-lg'>Email</button>";
    echo "    ";
    echo "<a href='admin.php'><button name='dead' form='none' class='primary-btn btn btn-lg'>Back</button></a>";
+
 }
 
 
@@ -86,6 +114,27 @@ if (isset($_POST['delete']))
    echo "<p>Phone: ".$output['phone']."</p>";
    echo "<p>Email: ".$output['email']."</p>";
    echo "<p>Specialty: ".$output['expertise']."</p>";
+   echo $output['pay'] == 1 ? '<p>Pay Type: Salary':'<p>Pay Type: Hourly'."</p>";
+   echo "<br>";
+
+
+
+   $joinQuery = "select * from access8 inner join approvedaccess8 on (access8.id = approvedaccess8.item_id) where emp_id='".$output['id']."';";
+
+   $result2 = mysqli_query($conn, $joinQuery) or die ('query failed');
+
+   echo "<br>";
+   echo "<h3>Employee has access to:</h3>";
+
+   while ($row2 = mysqli_fetch_array($result2)) {
+      echo $row2['item'];
+      echo "<br>";
+   }
+
+   echo "<br>";
+
+
+
    echo "<input type='hidden' name='photo' value='".$output['image']."'></input>";
    echo "<button class='primary-btn btn btn-lg' type='submit' name='confirmdelete' value='".$output['id']."'>Confirm Delete</button>";
    echo "</form>";
