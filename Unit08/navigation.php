@@ -7,6 +7,7 @@
       <?php if(isset($_SESSION['username'])): ?>
       <a class="nav-item nav-link" href="addemployee.php">Add Employee</a>
       <a class="nav-item nav-link" href="admin.php">Manage Employees</a>
+      <a class="nav-item nav-link" href="search.php">Search</a>
       <a class="nav-item nav-link" href="logout.php">Logout</a>
       <p class="nav-item nav-link">Logged in as <?php echo $_SESSION['username']; ?></p>
       <?php else: ?>

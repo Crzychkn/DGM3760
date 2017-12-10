@@ -28,20 +28,20 @@ $id = 0;
 
 if (isset($_POST['details']))
 {
-   $id = $_POST['details'] ?? 0;
+   $id = $_POST['details'];
 }
 elseif (isset($_POST['delete']))
 {
-   $id = $_POST['delete'] ?? 0;
+   $id = $_POST['delete'];
 }
 elseif (isset($_POST['update']))
 {
-   $id = $_POST['update'] ?? 0;
+   $id = $_POST['update'];
 }
-else
+elseif (isset($_POST['approve']))
 {
-   $id = $_POST['approve'] ?? 0;
-};
+   $id = $_POST['approve'];
+}
 
 $query = "select * from employees8 where id='$id'";
 
@@ -175,7 +175,6 @@ echo "    ";
 echo "<a href='admin.php'><button type='submit' form='dead' value='submit' class='primary-btn btn btn-lg'>Cancel</button></a>";
 
 }
-
 }
 ?>
 
@@ -213,10 +212,10 @@ if (isset($_POST['emailconfirm']))
 }
 
 ?>
-
-
 </div>
 </form>	
+
+
 
 
       </div>

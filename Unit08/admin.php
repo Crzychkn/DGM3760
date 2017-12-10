@@ -23,16 +23,23 @@ exit;
 <br>
 
 <?php
+if (isset($_POST['search'])) {
 
-$query = "select * from employees8";
+   $query = "select e.*, a.item_id from employees8 e join approvedaccess8 a on e.id = a.emp_id where item_id='".$_POST['search']."'";
+}
+else {
 
-$result = mysqli_query($conn, $query);
+   $query = "select * from employees8";
+}
+
+$result = mysqli_query($conn, $query) or die ('query failed');
+
+$resultArr = [];
 
 while ($row = mysqli_fetch_array($result))
 {
    $resultArr[] = $row;
 }
-
 ?>
 
 <table class="table table-striped">
