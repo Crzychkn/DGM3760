@@ -22,7 +22,6 @@ if (isset($_POST['searchexpertise']) && isset($_POST['searchdata']))
    $expertise = strtolower($_POST['searchdata']);
 
    $expertiseSanitized = str_replace(',',' ', $expertise);
-   echo $expertiseSanitized;
 
    $expertiseTerms = explode(' ', $expertiseSanitized);
 
@@ -38,12 +37,18 @@ if (isset($_POST['searchexpertise']) && isset($_POST['searchdata']))
 
    foreach ($searchArray as $term)
    {
-      $whereList[] = "expertise like '%term%'";
+      $whereList[] = "expertise like '%$term%'";
    }
 
-   $whereClause = implode('OR',$whereList);
+   $whereClause = implode(' OR ',$whereList);
 
-   echo $whereClause;
+   $query = "select * from expertise";
+
+   if (!empty($whereClause)) {
+      $query .= " where $whereClause";
+   }
+
+   echo $query;
 }
 
 
