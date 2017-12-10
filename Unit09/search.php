@@ -14,7 +14,30 @@ exit;
 
 ?>
 
+<div class="starter-template">
+
+   <form id="searchexpertise" action="search.php" method="post">
+     <div class="form-group">
+           <h1>Search Employee Expertise</h1>
+         <label for="searchdata" class="form-group">Search Employee Expertise</label>
+            <input name="searchdata" class="form-control" type="text" placeholder="Search Expertise">
+<small id="passwordHelpBlock" class="form-text text-muted">Separate terms with a comma.</small>
+   <br>
+   <button name="searchexpertise" type="submit" form="searchexpertise" value="" class="primary-btn btn btn-sm">Search</button>
+
+   <br>
+   <br>
+
+
+      </div>
+</div>
+
+
 <?php
+
+$expertise;
+$expertiseSanitized;
+$expertiseTerms;
 
 if (isset($_POST['searchexpertise']) && isset($_POST['searchdata']))
 {
@@ -42,65 +65,41 @@ if (isset($_POST['searchexpertise']) && isset($_POST['searchdata']))
 
    $whereClause = implode(' OR ',$whereList);
 
-   $query = "select * from expertise";
+   $query = "select * from employees9";
 
    if (!empty($whereClause)) {
       $query .= " where $whereClause";
    }
 
-   echo $query;
-}
 
+   echo "<h3>Search Results for '$expertiseSanitized'</h3>";
+
+
+   $result = mysqli_query($conn, $query) or die ('query failed');
+
+
+   if (mysqli_num_rows($result) > 0) {
+
+      while ($row = mysqli_fetch_array($result))
+      {
+
+         echo '<h4>'.$row['first']." ".$row['last'].'</h4>';
+         echo '<p>Expertise: '.$row['expertise'].'</p>';
+      }
+
+
+
+   } // end if rows
+   else {
+
+      echo "No search results found matching $expertise";
+   }
+
+}//end isset
 
 
 ?>
 
-
-
-   <div class="starter-template">
-
-   <form id="searchexpertise" action="search.php" method="post">
-     <div class="form-group">
-           <h1>Search Employee Expertise</h1>
-         <label for="searchdata" class="form-group">Search Employee Expertise</label>
-            <input name="searchdata" class="form-control" type="text" placeholder="Search Expertise">
-   <br>
-   <button name="searchexpertise" type="submit" form="searchexpertise" value="" class="primary-btn btn btn-sm">Search</button>
-
-   <br>
-   <br>
-
-
-        <h1>Search Employee Access</h1>
-
-<form id="searchemployees" action="admin.php" method="post">
-  <div class="form-group">
-<br>
-
-<?php
-
-$query = "select * from access9 order by item";
-
-$result = mysqli_query($conn, $query) or die('query failed');
-
-?>
-<div>
-<?php while ($row = mysqli_fetch_array($result)): ?>
-
-<button name="search" type="submit" form="searchemployees" value="<?php echo $row['id'];?>" class="primary-btn btn btn-sm"><?php echo $row['item']?></button>
-<br>
-<br>
-
-<?php endwhile; ?>
-
-
-
-  </div>
-
-</form>	
-
-
-      </div>
 
     </main><!-- /.container -->
 
