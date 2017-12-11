@@ -26,15 +26,16 @@ move_uploaded_file($tmp_name, $filepath.$filename);
 @unlink($_FILES['picture']['tmp_name']);
 
 //Store in Database
-$stmt = $conn->prepare("insert into employees (first, last, phone, email, expertise, image) values (?,?,?,?,?,?)");
+$stmt = $conn->prepare("insert into employees (first, last, phone, email, expertise, bio, image) values (?,?,?,?,?,?,?)");
 
-$stmt->bind_param("ssisss", $first, $last, $phone, $email, $expertise, $image);
+$stmt->bind_param("ssissss", $first, $last, $phone, $email, $expertise, $bio, $image);
 
 $first = $_POST['first'];
 $last = $_POST['last'];
 $phone = $_POST['phone'];
 $email = $_POST['email'];
 $expertise = $_POST['expertise'];
+$bio =$_POST['bio'];
 $image = $filepath.$filename;
 
 

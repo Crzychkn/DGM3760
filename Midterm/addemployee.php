@@ -35,6 +35,11 @@
   </div>
 
   <div class="form-group">
+    <label for="expertise">Bio</label>
+    <input type="text" class="form-control" id="bio" name="bio" placeholder="Employee Bio...">
+  </div>
+
+  <div class="form-group">
     <label for="picture">Picture</label>
     <input type="file" class="form-control-file" id="picture" name="picture">
     <br>

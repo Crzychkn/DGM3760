@@ -11,7 +11,11 @@
   <div class="form-group">
 <br>
 
+
 <?php
+
+$id = 0;
+
 if (isset($_POST['details']))
 {
    $id = $_POST['details'];
@@ -32,12 +36,14 @@ $query = "select * from employees where id='$id'";
 
 $result = mysqli_query($conn, $query);
 
+$resultArr = [];
+
 while ($row = mysqli_fetch_array($result))
 {
    $resultArr[] = $row;
 }
 
-foreach ($resultArr as $output)
+foreach ((array) $resultArr as $output)
 {
 
 
@@ -48,6 +54,7 @@ if (isset($_POST['details']))
    echo "<p>Phone: ".$output['phone']."</p>";
    echo "<p>Email: ".$output['email']."</p>";
    echo "<p>Expertise: ".$output['expertise']."</p>";
+   echo "<p>Bio: ".$output['bio']."</p>";
 echo "<br>";
 
   echo "<div class='form-group'>";
@@ -66,7 +73,7 @@ echo "<br>";
   echo "</div>";
 
    echo "<input type='hidden' name='id' value='".$output['id']."'>";
-   echo "<button name='email' form='manageemployees' class='primary-btn btn btn-lg'>Email</button>";
+   echo "<button name='sendemail' form='manageemployees' class='primary-btn btn btn-lg'>Email</button>";
    echo "    ";
    echo "<a href='index.php'><button name='dead' form='none' class='primary-btn btn btn-lg'>Back</button></a>";
 }
@@ -80,6 +87,7 @@ if (isset($_POST['delete']))
    echo "<p>Phone: ".$output['phone']."</p>";
    echo "<p>Email: ".$output['email']."</p>";
    echo "<p>Specialty: ".$output['expertise']."</p>";
+   echo "<p>Biography: ".$output['bio']."</p>";
    echo "<input type='hidden' name='photo' value='".$output['image']."'></input>";
    echo "<button class='primary-btn btn btn-lg' type='submit' name='confirmdelete' value='".$output['id']."'>Confirm Delete</button>";
    echo "</form>";
@@ -114,6 +122,11 @@ if (isset($_POST['update']))
     echo "<input type='text' class='form-control' id='expertise' name='expertise' value='".$output['expertise']."'>";
   echo "</div>";
 
+  echo "<div class='form-group'>";
+    echo "<label for='bio'>Bio</label>";
+    echo "<input type='text' class='form-control' id='bio' name='bio' value='".$output['bio']."'>";
+  echo "</div>";
+
 
 echo "<button type='submit' form='manageemployees' value='".$output['id']."' name='confirmupdate' class='primary-btn btn btn-lg'>Update</button>";
 echo "    ";
@@ -136,12 +149,12 @@ if (isset($_POST['confirmdelete']))
 
 if (isset($_POST['confirmupdate']))
 {
-   $query = "update employees set first='".$_POST['first']."', last='".$_POST['last']."', phone='".$_POST['phone']."', email='".$_POST['email']."', expertise='".$_POST['expertise']."' where id='".$_POST['confirmupdate']."';";
+   $query = "update employees set first='".$_POST['first']."', last='".$_POST['last']."', phone='".$_POST['phone']."', email='".$_POST['email']."', expertise='".$_POST['expertise']."', bio='".$_POST['bio']."' where id='".$_POST['confirmupdate']."';";
    mysqli_query($conn, $query);
    header("location: admin.php");
 }
 
-if (isset($_POST['email']))
+if (isset($_POST['sendemail']))
 {
    $query = "select * from employees where id='".$_POST['id']."'";
    $result = mysqli_query($conn, $query);

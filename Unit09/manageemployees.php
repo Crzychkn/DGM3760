@@ -22,7 +22,53 @@ exit;
   <div class="form-group">
 <br>
 
+
 <?php
+
+function convertMonth ($x) {
+
+   switch ($x) {
+   case 1:
+      $month = "January";
+      break;
+   case 2:
+      $month = "February";
+      break;
+   case 3:
+      $month = "March";
+      break;
+   case 4:
+      $month = "April";
+      break;
+   case 5:
+      $month = "May";
+      break;
+   case 6:
+      $month = "June";
+      break;
+   case 7:
+      $month = "July";
+      break;
+   case 8:
+      $month = "August";
+      break;
+   case 9:
+      $month = "September";
+      break;
+   case 10:
+      $month = "October";
+      break;
+   case 11:
+      $month = "November";
+      break;
+   case 12:
+      $month = "December";
+      break;
+   }
+
+      return $month;
+
+}
 
 $id = 0;
 
@@ -66,6 +112,17 @@ if (isset($_POST['details']))
    echo "<p>Email: ".$output['email']."</p>";
    echo "<p>Expertise: ".$output['expertise']."</p>";
    echo $output['pay'] == 1 ? '<p>Pay Type: Salary':'<p>Pay Type: Hourly'."</p>";
+
+   $year = substr($output['hire_date'], 0, 4);
+   $day = substr($output['hire_date'], 8, 2);
+   $month = substr($output['hire_date'], 5, 2);
+
+   $hireDate = convertMonth($month);
+
+   $hireDate .= " ".$day.",";
+   $hireDate .= " ".$year;
+   echo "<p>Hire Date: ".$hireDate."</p>";
+
    echo "<br>";
 
 
